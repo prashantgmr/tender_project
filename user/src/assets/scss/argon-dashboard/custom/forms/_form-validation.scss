@@ -8,7 +8,7 @@
 .has-danger {
     position: relative;
 
-    &:after, {
+    &:after {
         width: 19px;
         height: 19px;
         line-height: 19px;
@@ -22,6 +22,12 @@
         border-radius: 50%;
         font-size: 9px;
         opacity: 1;
+    }
+
+    &.form-group-vertical {
+        &::after{
+            top:45%
+        }
     }
 }
 

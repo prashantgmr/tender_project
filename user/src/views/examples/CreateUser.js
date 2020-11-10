@@ -20,11 +20,10 @@ import { GlobalContext } from '../../context/GlobalContext.js';
 
 export default function CreateUser() {
     const { register, handleSubmit, errors } = useForm();
-    const {addedUser , user} =useContext(GlobalContext)
-        
+    const {addedUser , user, error} =useContext(GlobalContext)
     const onSubmit = (data) => {
 
-             addedUser(data)
+             addedUser(data);
     }
 
     return (
@@ -46,7 +45,7 @@ export default function CreateUser() {
                             <CardBody className="tender_form">
                                 <form onSubmit={handleSubmit(onSubmit)} method="POST" encType="multipart/form-data">
 
-                                    <FormGroup>
+                                    <FormGroup className={error != null && error.name ? 'has-danger': ''}>
                                         <label
                                             className="form-control-label"
                                             htmlFor="input-full-name"
@@ -57,12 +56,12 @@ export default function CreateUser() {
                                             className="form-control-alternative form-control"
                                             id="input-full-name"
                                             name="name"
-                                            placeholder="Enter Full Name"
+                                            placeholder={error != null && error.name? error.name: "Enter Full Name"}
                                             type="text"
                                             ref={register}
                                         />
                                     </FormGroup>
-                                    <FormGroup>
+                                    <FormGroup className={error != null && error.email ? 'has-danger': ''}>
                                         <label
                                             className="form-control-label"
                                             htmlFor="input-email"
@@ -72,13 +71,13 @@ export default function CreateUser() {
                                         <input
                                             className="form-control-alternative form-control"
                                             id="input-email"
-                                            placeholder="Enter Email"
+                                            placeholder={error != null && error.email ? error.email : "Enter Email" }
                                             type="email"
                                             ref ={register}
                                             name="email"
                                         />
                                     </FormGroup>
-                                    <FormGroup>
+                                    <FormGroup className={error != null && error.username ? 'has-danger': ''}>
                                         <label
                                             className="form-control-label"
                                             htmlFor="input-username"
@@ -89,13 +88,13 @@ export default function CreateUser() {
                                             className="form-control-alternative form-control"
                                             // defaultValue="Lucky"
                                             id="input-username"
-                                            placeholder="Enter Username"
+                                            placeholder={error != null && error.username ? error.username : "Enter Username"}
                                             type="text"
                                             ref={register}
                                             name="username"
                                         />
                                     </FormGroup>
-                                    <FormGroup>
+                                    <FormGroup className={error != null && error.password ? 'has-danger': ''}>
                                         <label
                                             className="form-control-label"
                                             htmlFor="input-password"
@@ -106,7 +105,7 @@ export default function CreateUser() {
                                             className="form-control-alternative form-control"
                                             // defaultValue="Jesse"
                                             id="input-password"
-                                            placeholder="Enter Password"
+                                            placeholder={error != null && error.password ? error.password : "Enter Password"}
                                             type="password"
                                             ref={register}
                                             name="password"

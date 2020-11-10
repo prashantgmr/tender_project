@@ -24,7 +24,6 @@ import { GlobalContext } from '../../context/GlobalContext.js';
 export default function AddTender() {
     const { register, handleSubmit, errors } = useForm();
     const { addedTender ,error} = useContext(GlobalContext)
-    console.log(error && error.map(item=>item))
      const [pubdate, setPubDate] = useState("")
      const [subdate, setSubDate] = useState("")
      const [ad, setAD]=useState(false)
@@ -64,107 +63,101 @@ export default function AddTender() {
                                     {/* <h6 className="heading-small text-muted mb-4">
                                     Project information
                                     </h6> */}
-                                    <FormGroup>
+                                    <FormGroup className={error != null && error.ProjectTitle ? 'has-danger': ''}>
                                         <label
                                             className="form-control-label"
                                             htmlFor="input-project-title"
                                         >
                                             Project Title
                                          </label>
-                                         <div>
+                                        
                                         <input
                                             className="form-control-alternative form-control"
                                             // defaultValue="lucky.jesse"
                                             id="input-project-title"
                                             name="projectTitle"
-                                            placeholder="Enter project Title"
+                                            placeholder={error != null && error.ProjectTitle ? error.ProjectTitle : 'Enter project Title'}
                                             type="text"
                                             ref={register}
                                         />
-                                        {error && <span className="text-danger error">{error.ProjectTitle}</span>}
-                                        </div>
+                   
                                     </FormGroup>
-                                    <FormGroup>
+                                    <FormGroup className={error != null && error.IFBNo ? 'has-danger': '' }>
                                         <label
                                             className="form-control-label"
                                             htmlFor="input-ifb"
                                         >
                                             IFB NO:
                                         </label>
-                                        <div>
+                                        
                                         <input
                                             className="form-control-alternative form-control"
                                             id="input-ifb"
-                                            placeholder="Enter IFB NO"
+                                            placeholder={error != null && error.IFBNo ? error.IFBNo : 'Enter IFB NO'}
                                             type="text"
                                             ref ={register}
                                             name="ifbNo"
                                         />
-                                         {error && <span className="text-danger error">{error.IFBNo}</span>}
-                                         </div>
                                     </FormGroup>
-                                    <FormGroup>
+                                    <FormGroup className={error != null && error.Procurement ? 'has-danger': ''}>
                                         <label
                                             className="form-control-label"
                                             htmlFor="input-Procurement"
                                         >
                                             Procurement Method
                                         </label>
-                                        <div>
+                                        
                                         <input
                                             className="form-control-alternative form-control"
                                             // defaultValue="Lucky"
                                             id="input-Procurement"
-                                            placeholder="Enter Procurement Method"
+                                            placeholder={error != null && error.Procurement ? error.Procurement :"Enter Procurement Method"}
                                             type="text"
                                             ref={register}
                                             name="procurement"
                                         />
-                                        {error && <span className="text-danger error">{error.Procurement}</span>}
-                                        </div>
+            
                                     </FormGroup>
-                                    <FormGroup>
+                                    <FormGroup className={error != null&& error.PublicEntity ? 'has-danger': '' }>
                                         <label
                                             className="form-control-label"
                                             htmlFor="input-public-entity"
                                         >
                                             Public Entity
                                         </label>
-                                        <div>
+                                        
                                         <input
                                             className="form-control-alternative form-control"
                                             // defaultValue="Jesse"
                                             id="input-public-entity"
-                                            placeholder="Enter Public Entity"
+                                            placeholder={error != null && error.PublicEntity ? error.PublicEntity :"Enter Public Entity"}
                                             type="text"
                                             ref={register}
                                             name="publicentity"
                                         />
-                                        {error && <span className="text-danger error">{error.PublicEntity}</span>}
-                                        </div>
+                                        
                                     </FormGroup>
                                     {/* <h6 className="heading-small text-muted mb-4">
                                     Project Address
                                     </h6> */}
-                                    <FormGroup>
+                                    <FormGroup className={error != null && error.PublicAddress ? 'has-danger': '' }>
                                         <label
                                             className="form-control-label"
                                             htmlFor="input-project-address"
                                         >
                                             Project Address
                                         </label>
-                                        <div>
+                                        
                                         <input
                                             className="form-control-alternative form-control"
                                             // defaultValue="Jesse"
                                             id="input-project-address"
-                                            placeholder="Enter Public Entity"
+                                            placeholder={error != null && error.PublicAddress ? error.PublicAddress :"Enter Public Entity"}
                                             type="text"
                                             ref={register}
                                             name="projectaddress"
                                         />
-                                        {error && <span className="text-danger error">{error.PublicAddress}</span>}
-                                        </div>
+                                      
                                         {/* <Input type="select" name="province" id="province" ref={register}>
                                             <option></option>
                                         </Input> */}
@@ -184,7 +177,7 @@ export default function AddTender() {
                                     <Row >
                                     
                                     <Col md="6">
-                                     <FormGroup className="form-group-vertical">
+                                     <FormGroup className={`form-group-vertical ${error != null && error.noticepubdate ? 'has-danger': ''  }`}>
                                     <label
                                             className="form-control-label"
                                             htmlFor="input-notice-publication-date"
@@ -192,7 +185,7 @@ export default function AddTender() {
                                            Notice Publication Date
                                            
                                         </label>
-                                    <div>
+                                    
                                     {!ad ? 
                                     <NepaliDatePicker 
                                     inputClassName="form-control "
@@ -206,20 +199,18 @@ export default function AddTender() {
                                     value={pubdate}
                                      onChange={(value) => setPubDate(value)}
                                     name="datestart" />}
-                                   
-                                    {error && <span className="text-danger error">{error.noticepubdate}</span>}
-                                    </div>
+
                                      </FormGroup>
                                     </Col>
                                     <Col md="6">
-                                     <FormGroup className="form-group-vertical">
+                                     <FormGroup className={`form-group-vertical ${error != null && error.bidsubdate ? 'has-danger': ''}`}>
                                     <label
                                             className="form-control-label"
                                             htmlFor="input-bid-submission-date"
                                         >
                                            Last Day of Bid Submission
                                         </label>
-                                    <div>
+                                    
                                     {!ad ? <NepaliDatePicker 
                                     inputClassName="form-control "
                                     id   = "bid-submission-date"
@@ -234,8 +225,6 @@ export default function AddTender() {
                                     onChange={(value) => setSubDate(value)}
                                     name="bidsubmission" /> 
                                     }
-                                    {error && <span className="text-danger error">{error.bidsubdate}</span>}
-                                    </div>
                                     </FormGroup>
                                     </Col>
                                     </Row>

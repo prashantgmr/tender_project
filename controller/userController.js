@@ -61,8 +61,8 @@ exports.addUser=  async (req, res, next) => {
     }); 
   } catch (err) {
     if(err.name === 'ValidationError') {
-      const messages = Object.values(err.errors).map(val => val.message);
-
+      const messages = Object.values(err.errors).reduce((obj,val) => ( {...obj, [val.path]:val.message}),{});
+      console.log(messages)
       return res.status(400).json({
         success: false,
         error: messages
