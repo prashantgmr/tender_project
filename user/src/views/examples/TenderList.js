@@ -129,6 +129,7 @@ export default function TenderList() {
                     // { title: "Procurement Method", field: "Procurement" },
                     {
                       title: "Days Remaining",
+                      type: 'numeric',
                       render: (rowData) => (
                         <CountDown date={rowData.bidsubdate} dateAD={rowData.dateAD} />
                       ),
